@@ -1,0 +1,33 @@
+The goal of this task is claiming ownership of the contract and reducing its balance to 0.
+
+The source contract has three functions that can be used to become the owner: 
+    - contribute() public payable
+    - withdraw() public onlyOwner
+    - receive() external payable
+
+contribute():
+    - can be used to deposit a maximum value of 0.001 Ether
+    - grants owner role to account with the highest total contribution
+    - original owner starts with a contribution of 1000 Ether
+
+withdraw():
+    - allows the withdrawal of all contract funds
+    - can only be executed by the owner
+
+receive(): 
+    - gives owner privileges to the caller
+    - requires the call to have an Ether value greater than zero.
+    - requires the caller to have made previous contributions
+    - is a fallback functions
+    -> is called if no other function is specified by an incominc call that has an Ether value
+
+
+Plan of Attack:
+    - contribute 1 Wei (or less) using contribute()
+    -> allows us to use the receive() function
+
+    - send a call with an Ether value that does not target any of the other functions
+    -> trigger the fallback receive() function to gain owner privileges
+
+    - call the withdraw() function
+    -> withdraws all funds of the target contract
