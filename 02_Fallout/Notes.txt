@@ -1,0 +1,15 @@
+The goal of this level is gaining ownership of the target contract.
+
+The contract contains a function called Fal1out() that is intended to be the constructor.
+
+However, it is a public function instead as constructors are written with the following syntax:
+
+    constructor() {}
+
+Additionally, it contains a typo in the word Fallout.
+
+Since this function provides the caller with ownership of the contract we can use it to exploit the contract.
+
+Plan of Attack:
+    - call the Fal1out() function
+    -> This is enough to gain ownership
