@@ -1,0 +1,17 @@
+In this level, the target contract has a flip(bool) function that lets the caller predict a "random" coinflip.
+
+The goal of the level is predicting the coinflip 10 times in a row.
+
+Since the function flip(bool) uses a hash of the previous block number for its randomness, it is not truly random.
+
+As we also know the previous block number we can calculate the result of the coin flip before calling the target contract.
+
+Since the target only allows one call of the flip(bool) function per block we repeat this process 10 times.
+
+To automate the prediction process we implement the Attack contract that has a function to automatically predict one coinflip.
+
+Plan of Attack:
+    - Calculate the result of the coin flip
+    - Call the target with the calculated result as a prediction
+    - Repeat the previous steps 10 times on different blocks
+    -> This allows us to predict the coinflip 10 times in a row
